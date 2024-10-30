@@ -320,6 +320,10 @@ void sonar_pi::ToggleSonarFrame()
     ::wxBell();
     if (!m_pSonarFrame)
     {
+        // 获取主屏幕大小
+        // wxSize screenSize = wxDisplay().GetGeometry().GetSize();
+        // int screenWidth = screenSize.GetWidth();
+        // int screenHeight = screenSize.GetHeight();
         m_pSonarFrame = new SonarFrame();
         m_pSonarFrame->Create(m_parent_window,
                               this,
@@ -328,8 +332,9 @@ void sonar_pi::ToggleSonarFrame()
                                                PLUGIN_VERSION_MAJOR,
                                                PLUGIN_VERSION_MINOR),
                               wxPoint(m_sonar_frame_x, m_sonar_frame_y),
-                              //   wxPoint(200, 200),
                               wxSize(m_sonar_frame_sx, m_sonar_frame_sy));
+        //   wxPoint(screenWidth / 2, screenHeight / 2),
+        //   wxSize(screenWidth / 2, screenHeight));
         m_pSonarFrame->Show();
     }
     else
