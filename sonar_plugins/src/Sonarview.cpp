@@ -106,12 +106,14 @@ bool SonarFrame::Create(wxWindow *parent, sonar_pi *ppi, wxWindowID id,
                    wxCAPTION |
                    wxCLIP_CHILDREN);
 
-    //    long wstyle = wxDEFAULT_FRAME_STYLE;
+    // long wstyle = wxDEFAULT_FRAME_STYLE;
     m_pViewState = new ViewState(pos, size);
     if (!wxDialog::Create(parent, id, caption, pos, m_pViewState->GetWindowSize(), wstyle))
     {
         return false;
     }
+    this->CenterOnScreen(); // 先居中
+    this->Move(pos);        // 然后移动到指定位置
 
     // Add panel to contents of frame
     wxPanel *panel = new wxPanel(this, plCanvasId);
