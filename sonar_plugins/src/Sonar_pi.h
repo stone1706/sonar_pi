@@ -96,10 +96,6 @@ public:
     wxFileConfig *GetConfig(void) { return m_pconfig; }
     ArrayOfPlugIn_AIS_Targets *GetSonarTargets();
     void OnSonarFrameClose();
-    bool ShowMoored(void);
-    double GetMooredSpeed(void);
-    bool ShowCogArrows(void);
-    int GetCogArrowMinutes(void);
 
     // // 声明静态事件表和事件表条目
     void ToggleSonarFrame(); // 新方法

@@ -64,25 +64,6 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin *p)
 //
 //---------------------------------------------------------------------------------------------------------
 
-void sonar_pi::OnKeyPress(wxKeyEvent &event)
-{
-    // wxMessageBox("Hello, World!", "Canvas MessageBox", wxOK | wxICON_INFORMATION);
-    // WXK_NUMPAD3
-    if (event.GetKeyCode() == '1' && event.ControlDown())
-    {
-        try
-        {
-            ToggleSonarFrame(); // 调用打开/关闭 SonarFrame 方法
-            // m_parent_window->SetFocus();
-        }
-        catch (const std::exception &e)
-        {
-            ;
-        }
-    }
-    event.Skip(); // 继续处理其他事件
-}
-
 sonar_pi::sonar_pi(void *ppimgr)
     : opencpn_plugin_117(ppimgr),
       m_pconfig(0),
@@ -347,6 +328,7 @@ void sonar_pi::ToggleSonarFrame()
                                                PLUGIN_VERSION_MAJOR,
                                                PLUGIN_VERSION_MINOR),
                               wxPoint(m_sonar_frame_x, m_sonar_frame_y),
+                              //   wxPoint(200, 200),
                               wxSize(m_sonar_frame_sx, m_sonar_frame_sy));
         m_pSonarFrame->Show();
     }
@@ -409,38 +391,6 @@ void sonar_pi::OnSonarFrameClose()
 {
     m_pSonarFrame = 0;
     SaveConfig();
-}
-
-bool sonar_pi::ShowMoored(void)
-{
-    bool Result = true;
-    m_pconfig->SetPath(_T( "/Settings/Sonar" ));
-    m_pconfig->Read(_T( "bShowMooredTargets" ), &Result, 1);
-    return Result;
-}
-
-double sonar_pi::GetMooredSpeed(void)
-{
-    double Result = 0.;
-    m_pconfig->SetPath(_T( "/Settings/Sonar" ));
-    m_pconfig->Read(_T( "MooredTargetMaxSpeedKnots" ), &Result, 0.0);
-    return Result;
-}
-
-bool sonar_pi::ShowCogArrows(void)
-{
-    bool Result = true;
-    m_pconfig->SetPath(_T( "/Settings/Sonar" ));
-    m_pconfig->Read(_T("bShowCOGArrows"), &Result, 1);
-    return Result;
-}
-
-int sonar_pi::GetCogArrowMinutes(void)
-{
-    int Result = 6;
-    m_pconfig->SetPath(_T( "/Settings/Sonar" ));
-    m_pconfig->Read(_T("CogArrowMinutes"), &Result, 6);
-    return Result;
 }
 
 void sonar_pi::SetColorScheme(PI_ColorScheme cs)
@@ -506,4 +456,24 @@ bool sonar_pi::SaveConfig(void)
     {
         return false;
     }
+}
+
+void sonar_pi::OnKeyPress(wxKeyEvent &event)
+{
+    try
+    {
+        // wxMessageBox("Hello, World!", "Canvas MessageBox", wxOK | wxICON_INFORMATION);
+        // WXK_NUMPAD3
+        if (event.GetKeyCode() == '1' && event.ControlDown())
+        {
+
+            ToggleSonarFrame(); // 调用打开/关闭 SonarFrame 方法
+                                // m_parent_window->SetFocus();
+        }
+    }
+    catch (const std::exception &e)
+    {
+        ;
+    }
+    event.Skip(); // 继续处理其他事件
 }

@@ -47,22 +47,42 @@ EVT_LEFT_DOWN(Canvas::mouseDown)
 EVT_LEFT_UP(Canvas::mouseReleased)
 EVT_MOUSEWHEEL(Canvas::mouseScroll)
 EVT_PAINT(Canvas::paintEvent)
-// EVT_KEY_DOWN(Canvas::OnKeyDown) // 绑定按键事件
+EVT_KEY_DOWN(Canvas::OnKeyDown) // 绑定按键事件
 END_EVENT_TABLE()
 
 // 重写键盘事件处理方法
-// void Canvas::OnKeyDown(wxKeyEvent &event)
-// {
-//     // if (event.GetKeyCode() == 'z')
-//     // {
-//     wxMessageBox("Hello, World!", "Canvas MessageBox", wxOK | wxICON_INFORMATION);
-//     // if (pPlugIn)
-//     // {
-//     //     pPlugIn->ToggleSonarFrame();
-//     // }
-//     // }
-//     event.Skip(); // 继续处理其他事件
-// }
+void Canvas::OnKeyDown(wxKeyEvent &event)
+{
+    try
+    {
+        if (event.GetKeyCode() == '1' && event.ControlDown())
+        {
+
+            pv->pPlugIn->ToggleSonarFrame(); // 调用打开/关闭 SonarFrame 方法
+        }
+        // WXK_LEFT,
+        // WXK_RIGHT,
+        if (event.GetKeyCode() == WXK_UP)
+        {
+            pv->img_data_size += 0.1;
+            pv->Refresh();
+            this->SetFocus();
+        }
+        if (event.GetKeyCode() == WXK_DOWN)
+        {
+            pv->img_data_size -= 0.1;
+            pv->Refresh();
+            this->SetFocus();
+        }
+    }
+    catch (const std::exception &e)
+    {
+        ;
+    }
+    event.Skip(); // 继续处理其他事件
+
+    // wxMessageBox("Hello, World!", "Canvas MessageBox", wxOK | wxICON_INFORMATION);
+}
 
 Canvas::Canvas(wxWindow *parent, SonarFrame *view,
                wxWindowID id, const wxPoint &pos, const wxSize &size)

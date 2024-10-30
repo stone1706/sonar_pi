@@ -116,6 +116,10 @@ public:
     void paintEvent(wxPaintEvent &event);
     void resize_img_data(wxBitmap *img_data, float size);
 
+    sonar_pi *pPlugIn;
+    wxPoint img_position;
+    float img_data_size;
+
 private:
     void OnClose(wxCloseEvent &event);
     void OnNorthUp(wxCommandEvent &event);
@@ -127,7 +131,7 @@ private:
 
     //    Data
     wxWindow *pParent;
-    sonar_pi *pPlugIn;
+
     wxTimer *m_Timer;
     wxPanel *m_pCanvas;
     wxCheckBox *m_pNorthUp;
@@ -136,8 +140,7 @@ private:
     int m_Range;
     ViewState *m_pViewState;
     wxBitmap *img_data;
-    wxPoint img_position;
-    float img_data_size;
+
     bool m_isDragging;
 };
 

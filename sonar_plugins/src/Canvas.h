@@ -31,6 +31,7 @@
 #define _CANVAS_H_
 
 #include "Sonarview.h"
+#include "Sonar_pi.h"
 
 class Canvas : public wxPanel
 {
@@ -43,7 +44,7 @@ public:
     void mouseReleased(wxMouseEvent &event);
     void mouseScroll(wxMouseEvent &event);
     void paintEvent(wxPaintEvent &event);
-    // void OnKeyDown(wxKeyEvent &event);
+    void OnKeyDown(wxKeyEvent &event);
     DECLARE_EVENT_TABLE()
 
 private:
