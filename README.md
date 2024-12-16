@@ -1,93 +1,91 @@
-# opencpn_pi
+AIS Radar style View plug-in for OpenCPN
+==================================
 
+Source Repository : https://github.com/Verezano/AISradar_pi
 
+Maintance Repository: https://github.com/rgleason/AISradar_pi/
 
-## Getting started
+Please submit PR's to both repositories. Thank you.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+History
+-------
+This plugin was created in 2011 to show AIS targets in a radar style view. While there were no radar plugins at the time it was inadvertently named radar_pi. Over time this has been corrected to sonar_pi and so is the repostory name. Since the plugin is packaged in some distributions its name sonar_pi cannot be changed, because that would break things.
+All references to radar in the code have been changed to sonar or sonarview to reflect the real purpose of this plugin.
+As suggested by r.gleason the repository is renamed to AISradar_pi.git
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Plugin Manager
+--------------
+This plugin is easily available from within OpenCPN using Options > Plugin Manager for many supported OS.
 
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+Compiling
+---------
 ```
-cd existing_repo
-git remote add origin http://www.git-code.net/dong_qicai/opencpn_pi.git
-git branch -M main
-git push -uf origin main
+git clone --recurse-submodules https://github.com/rgleason/AISradar_pi.git
 ```
 
-## Integrate with your tools
+###Build:
+```
+mkdir AISradar_pi/build
+cd AISradar_pi/build
+cmake ..
+cmake --build .
+```
+Windows note: You must place opencpn.lib into your build directory to be able to link the plugin DLL. You can get this file from your local OpenCPN build, or alternatively download from http://sourceforge.net/projects/opencpnplugins/files/opencpn_lib/
 
-- [ ] [Set up project integrations](http://www.git-code.net/dong_qicai/opencpn_pi/-/settings/integrations)
+Debugging:
+If you check out the plugin source into the plugins subdirectory of your OpenCPN source tree, you can build it as part of it.
 
-## Collaborate with your team
+Windows Specific Libraries
+--------------------------
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencp
 
-## Test and Deploy
+###Creating a package
+Linux
+```
+make package
+```
 
-Use the built-in continuous integration in GitLab.
+Windows
+```
+cmake --build . --config release --target package
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+###Build on Mac OS X:
+Tools: Can be installed either manually or from Homebrew (http://brew.sh)
+```
+#brew install git #If I remember well, it is already available on the system
+brew install cmake
+brew install gettext
+ln -s /usr/local/Cellar/gettext/0.19.2/bin/msgmerge /usr/local/bin/msgmerge
+ln -s /usr/local/Cellar/gettext/0.19.2/bin/msgfmt /usr/local/bin/msgfmt
+```
 
-***
+To target older OS X versions than the one you are running, you need the respective SDKs installed. The easiest way to achieve that is using https://github.co
 
-# Editing this README
+####Building wxWidgets
+(do not use wxmac from Homebrew, it is not compatible with OpenCPN)
+Get wxWidgets 3.0.x source from http://wxwidgets.org
+Configure, build and install
+```
+cd wxWidgets-3.0.2
+./configure --enable-unicode --with-osx-cocoa --with-macosx-sdk=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7
+make
+sudo make install
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+####Building the plugin
+Before running cmake, you must set the deployment target to OS X 10.7 to be compatible with the libraries used by core OpenCPN
+```
+export MACOSX_DEPLOYMENT_TARGET=10.7
+```
 
-## Suggestions for a good README
+####Packaging on OS X
+Get and install the Packages application from http://s.sudre.free.fr/Software/Packages/about.html
+```
+make create-pkg
+```
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+License
+-------
+The plugin code is licensed under the terms of the GPL v2 or, at your convenience, later version.

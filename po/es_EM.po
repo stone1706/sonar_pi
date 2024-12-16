@@ -1,0 +1,99 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: opencpn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-23 14:30-0600\n"
+"PO-Revision-Date: 2023-10-19 09:18\n"
+"Last-Translator: \n"
+"Language-Team: Spanish (Modern)\n"
+"Language: es_EM\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Project-ID: 49843\n"
+"X-Crowdin-Language: es-EM\n"
+"X-Crowdin-File: /plugins/sonar_pi/po/sonar_pi.pot\n"
+"X-Crowdin-File-ID: 106\n"
+
+#: src/sonar_pi.cpp:92 src/sonar_pi.cpp:137 src/sonar_pi.cpp:217
+msgid "AIS Radar view"
+msgstr ""
+
+#: src/sonar_pi.cpp:142
+msgid "AIS Radar view PlugIn"
+msgstr ""
+
+#: src/sonar_pi.cpp:147
+msgid "Radar PlugIn for OpenCPN\n"
+"Shows AIS targets in a radar style view \n\n"
+msgstr ""
+
+#: src/sonar_pi.cpp:155
+msgid "AIS Radar"
+msgstr ""
+
+#: src/sonar_pi.cpp:168
+msgid "Radar Preferences"
+msgstr ""
+
+#: src/sonar_pi.cpp:179 src/sonar_pi.cpp:201
+msgid "Radar"
+msgstr ""
+
+#: src/sonar_pi.cpp:183
+msgid "Show RADAR icon:"
+msgstr ""
+
+#: src/sonar_pi.cpp:187
+msgid "Use AIS as radar source:"
+msgstr ""
+
+#: src/sonar.cpp:116
+msgid "Controls"
+msgstr ""
+
+#: src/sonar.cpp:118 src/sonar.cpp:347
+msgid "Range"
+msgstr ""
+
+#: src/sonar.cpp:133
+msgid "Miles"
+msgstr ""
+
+#: src/sonar.cpp:136 src/sonar.cpp:352
+msgid "North Up"
+msgstr ""
+
+#: src/sonar.cpp:140
+msgid "EBL"
+msgstr ""
+
+#: src/sonar.cpp:348
+msgid "Ring "
+msgstr ""
+
+#: src/sonar.cpp:355
+msgid "N"
+msgstr ""
+
+#: src/sonar.cpp:356
+msgid "S"
+msgstr ""
+
+#: src/sonar.cpp:357
+msgid "W"
+msgstr ""
+
+#: src/sonar.cpp:358
+msgid "E"
+msgstr ""
+
+#: src/sonar.cpp:360
+msgid "Course Up"
+msgstr ""
+
+#: src/sonar.h:102
+msgid "Radar Display"
+msgstr ""
